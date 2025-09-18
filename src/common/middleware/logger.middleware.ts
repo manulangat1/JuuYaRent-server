@@ -1,0 +1,25 @@
+import { HttpStatus, Injectable, Logger, NestMiddleware } from '@nestjs/common';
+import { Request, Response } from 'express';
+@Injectable()
+export class LoggerMiddleware implements NestMiddleware {
+  private readonly logger = new Logger('HTTP');
+
+  use(req: Request, res: Response, next: (error?: any) => void) {
+    res.on('finish', () => {
+      const { method, originalUrl } = req;
+      const { statusCode, statusMessage } = res;
+
+      const message = `${method} ${originalUrl} ${statusCode} ${statusMessage}`;
+      console.log(message);
+      if (statusCode >= HttpStatus.INTERNAL_SERVER_ERROR) {
+        this.logger.error(message);
+      }
+      if (statusCode >= HttpStatus.BAD_REQUEST) {
+        this.logger.warn(message);
+      }
+      return this.logger.log(message);
+    });
+
+    next();
+  }
+}

@@ -1,19 +1,27 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 
 import { AppconfigModule } from './appconfig/appconfig.module';
-import { APP_FILTER } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { AllExceptionFilter } from './common/filters/all_exception.filter';
 import { TrimmerMiddleware } from './common/middleware/trimmer.middleware';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { AuthModule } from './auth/auth.module';
+import { AdminModule } from './admin/admin.module';
+import { AuthGuard } from './common/guards/auth.guard';
+import { AgentModule } from './agent/agent.module';
+import { PortfolioModule } from './portfolio/portfolio.module';
 
 @Module({
-  imports: [AppconfigModule, AuthModule],
+  imports: [AppconfigModule, AuthModule, AdminModule, AgentModule, PortfolioModule],
   controllers: [],
   providers: [
     {
       provide: APP_FILTER,
       useClass: AllExceptionFilter,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
     },
   ],
 })

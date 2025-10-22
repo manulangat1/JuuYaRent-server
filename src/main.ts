@@ -25,7 +25,7 @@ async function bootstrap() {
 
   app.enableVersioning({
     type: VersioningType.URI,
-    defaultVersion: 'v1',
+    defaultVersion: '1',
   });
 
   app.useGlobalPipes(

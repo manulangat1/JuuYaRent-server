@@ -1,6 +1,8 @@
 import { Global, Module } from '@nestjs/common';
 import { AppconfigService } from './appconfig.service';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import typeorm from '../config';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 @Global()
 @Module({
@@ -8,6 +10,19 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot({
       envFilePath: '.env',
       isGlobal: true,
+      load: [typeorm],
+    }),
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: async (
+        configService: ConfigService,
+      ): Promise<TypeOrmModuleOptions> => {
+        const options = configService.get<TypeOrmModuleOptions>('typeorm');
+        if (!options) {
+          throw new Error('TypeORM configuration not found in configService');
+        }
+        return options;
+      },
     }),
   ],
   providers: [AppconfigService],

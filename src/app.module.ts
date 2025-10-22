@@ -5,9 +5,10 @@ import { APP_FILTER } from '@nestjs/core';
 import { AllExceptionFilter } from './common/filters/all_exception.filter';
 import { TrimmerMiddleware } from './common/middleware/trimmer.middleware';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [AppconfigModule],
+  imports: [AppconfigModule, AuthModule],
   controllers: [],
   providers: [
     {

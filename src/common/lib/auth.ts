@@ -6,7 +6,6 @@ export const hashPassword = async (
   password: string,
   salt: string,
 ): Promise<string> => {
-  console.log(password, salt);
   return bcrypt.hash(password, salt);
 };
 

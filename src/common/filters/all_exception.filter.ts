@@ -13,8 +13,6 @@ export class AllExceptionFilter implements ExceptionFilter {
     const context = host.switchToHttp();
     const response = context.getResponse<Response>();
 
-    console.log(exception, ' my exception');
-
     if (exception['code'] === 'ENOENT') {
       return response.status(HttpStatus.NOT_FOUND).json(_404.FILE_NOT_FOUND);
     }

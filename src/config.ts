@@ -38,7 +38,5 @@ const config: DataSourceOptions = {
   synchronize: false,
 };
 
-console.log(__dirname);
-
 export default registerAs('typeorm', () => config);
 export const connectionSource = new DataSource(config);

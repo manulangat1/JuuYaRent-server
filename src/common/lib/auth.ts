@@ -1,11 +1,12 @@
 import { randomBytes } from 'crypto';
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 import { Admin } from '../../db/entities/Admin.entity';
 
 export const hashPassword = async (
   password: string,
   salt: string,
 ): Promise<string> => {
+  console.log(password, salt);
   return bcrypt.hash(password, salt);
 };
 

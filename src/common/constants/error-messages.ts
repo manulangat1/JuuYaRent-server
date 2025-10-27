@@ -3,6 +3,14 @@ export const _400 = {
     code: 'UPLOADED_FILE_IS_TOO_LARGE',
     message: 'Uploaded file is too large',
   },
+  EMAIL_EXISTS: {
+    code: 'EMAIL_EXISTS',
+    message: 'User with specified email already exists',
+  },
+  INVALID_CREDENTIALS: {
+    code: 'INVALID_CREDENTIALS',
+    message: 'Email or password provided incorrect',
+  },
 };
 
 export const _401 = {

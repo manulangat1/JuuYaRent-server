@@ -26,10 +26,10 @@ export class Admin {
   @Column('varchar')
   email: string;
 
-  @Column('varchar')
+  @Column('varchar', { select: false })
   password: string;
 
-  @Column('varchar')
+  @Column('varchar', { select: false })
   salt: string;
 
   @Column('boolean')

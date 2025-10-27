@@ -10,7 +10,6 @@ export class LoggerMiddleware implements NestMiddleware {
       const { statusCode, statusMessage } = res;
 
       const message = `${method} ${originalUrl} ${statusCode} ${statusMessage}`;
-      console.log(message);
       if (statusCode >= HttpStatus.INTERNAL_SERVER_ERROR) {
         this.logger.error(message);
       }

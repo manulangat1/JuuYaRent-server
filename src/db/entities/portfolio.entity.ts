@@ -4,10 +4,12 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Admin } from './Admin.entity';
+import { Agent } from './agent.entity';
 
 @Entity()
 export class Portfolio {
@@ -30,4 +32,7 @@ export class Portfolio {
 
   @ManyToOne(() => Admin, (admin) => admin.portfolio)
   admin: Admin;
+
+  @OneToMany(() => Agent, (agent) => agent.portfolio)
+  agent: Agent[];
 }

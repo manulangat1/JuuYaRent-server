@@ -58,7 +58,17 @@ const getSwaggerDocumentation = (app: INestApplication): void => {
     .setDescription('Juu ya rent')
     .setVersion('1.0')
     .addTag('Juu Ya Rent')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        in: 'header',
+      },
+      'access-token',
+    )
     .build();
+
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup(SWAGGER_DOCUMENTATION_URL, app, documentFactory);
 };

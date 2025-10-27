@@ -19,7 +19,6 @@ export class AuthService {
 
   async signAdminUp(dto: CreateAdmin) {
     const admin = await this.adminService.create(dto);
-    console.log(admin);
     return admin;
   }
 
@@ -51,7 +50,6 @@ export class AuthService {
   }
 
   async loginJWTResponse(data: AdminLoginDTO): Promise<any> {
-    console.log(data);
     const access_token = await this.jwtService.signAsync({ ...data });
     return {
       access_token,

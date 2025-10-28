@@ -17,6 +17,8 @@ export class AllExceptionFilter implements ExceptionFilter {
       return response.status(HttpStatus.NOT_FOUND).json(_404.FILE_NOT_FOUND);
     }
 
+    console.log(exception);
+
     // Errors that will be handled and get thrown within the application
     if (exception instanceof HttpException) {
       const statusCode = exception.getStatus();

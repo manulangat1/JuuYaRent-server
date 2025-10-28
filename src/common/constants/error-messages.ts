@@ -25,6 +25,10 @@ export const _404 = {
     code: 'FILE_NOT_FOUND',
     message: 'Requested file not found',
   },
+  PORTFOLIO_NOT_FOUND: {
+    code: 'PORTFOLIO_NOT_FOUND',
+    message: `Portfolio not found`,
+  },
 };
 
 export const _500 = {

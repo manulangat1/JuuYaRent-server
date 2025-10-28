@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { Admin } from './Admin.entity';
 import { Agent } from './agent.entity';
+import { Property } from './property.entity';
 
 @Entity()
 export class Portfolio {
@@ -35,4 +36,7 @@ export class Portfolio {
 
   @OneToMany(() => Agent, (agent) => agent.portfolio)
   agent: Agent[];
+
+  @OneToMany(() => Property, (property) => property.portfolio)
+  property: Property[];
 }

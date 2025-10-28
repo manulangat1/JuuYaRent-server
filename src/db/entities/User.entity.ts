@@ -5,11 +5,13 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { genSalt } from 'bcrypt';
 import { hashPassword } from '../../common/lib/auth';
+import { UserUnit } from './userUnit.entity';
 
 @Entity()
 export class User {
@@ -40,9 +42,7 @@ export class User {
   @Column({ default: false })
   isDeleted: string;
 
-  // @Column({ type: Date })
-  // deletedAt: Date;
-
+  //TODO: make this column nullable
   @Column({ type: Date })
   activatedAt: Date;
 
@@ -54,6 +54,9 @@ export class User {
 
   @DeleteDateColumn()
   deletedAt: Date;
+
+  @OneToMany(() => UserUnit, (userUnit) => userUnit.user)
+  tenantUnits: UserUnit[];
 
   @BeforeInsert()
   @BeforeUpdate()

@@ -15,7 +15,7 @@ import { Admin } from '../db/entities/Admin.entity';
 import { ApiSecurity } from '@nestjs/swagger';
 import { Portfolio } from '../db/entities/portfolio.entity';
 
-@Controller('portfolio')
+@Controller('portfolios')
 @ApiSecurity('access-token')
 export class PortfolioController {
   constructor(private readonly portfolioService: PortfolioService) {}

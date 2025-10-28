@@ -11,7 +11,7 @@ import { AgentService } from './agent.service';
 import { CreateAgentDto } from './dto/create-agent.dto';
 import { ApiSecurity } from '@nestjs/swagger';
 
-@Controller('agent')
+@Controller('agents')
 @ApiSecurity('access-token')
 export class AgentController {
   constructor(private readonly agentService: AgentService) {}

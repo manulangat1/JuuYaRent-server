@@ -15,4 +15,14 @@ export class AppconfigService {
   get clientPortalUrl(): string {
     return this.configService.getOrThrow<string>('CLIENT_PORTAL_URL');
   }
+
+  get redisConfig() {
+    return {
+      redisUsername: this.configService.getOrThrow<string>('REDIS_USERNAME'),
+      redisPassword: this.configService.getOrThrow<string>('REDIS_PASSWORD'),
+      redisPort: this.configService.getOrThrow<string>('REDIS_PORT'),
+      redisHost: this.configService.getOrThrow<string>('REDIS_HOST'),
+      //   redisPassword: this.configService.getOrThrow<string>('REDIS_PASSWORD'),
+    };
+  }
 }

@@ -1,4 +1,9 @@
-import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  Logger,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserUnit } from '../db/entities/userUnit.entity';
 import { DataSource, Repository } from 'typeorm';
@@ -9,6 +14,7 @@ import { User } from '../db/entities/User.entity';
 import { generateRandomText } from '../common/lib/auth';
 import { UnitStatus } from '../common/constants/types.enum';
 import { _400 } from '../common/constants/error-messages';
+import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
 export class UserUnitService {
@@ -19,6 +25,7 @@ export class UserUnitService {
     @InjectRepository(Unit) private unitRepository: Repository<Unit>,
     @InjectRepository(User) private userRepository: Repository<User>,
     private dataSource: DataSource,
+    @Inject('NOTIFICATION_SERVICE') private redisClient: ClientProxy,
   ) {}
 
   async create(unitID: string, dto: CreateUserDto): Promise<any> {
@@ -67,6 +74,11 @@ export class UserUnitService {
       await this.userRepository.save(newUser);
 
       // TODO: come and send the password via a notification service here.
+
+      this.redisClient.emit('send_email', {
+        to: newUser.email,
+        password,
+      });
 
       //  now attach the user and unit via the user unit table
       const newUserUnit = await this.userUnitRepository.create({

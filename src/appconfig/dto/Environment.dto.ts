@@ -20,4 +20,20 @@ export class EnvironmentDTO {
   @IsNotEmpty()
   @IsUrl()
   CLIENT_PORTAL_URL: string;
+
+  @IsNotEmpty()
+  @IsString()
+  REDIS_USERNAME: string;
+
+  @IsNotEmpty()
+  @IsString()
+  REDIS_PASSWORD: string;
+
+  @IsNotEmpty()
+  @IsString()
+  REDIS_HOST: string;
+
+  @IsNotEmpty()
+  @IsNumber()
+  REDIS_PORT: number;
 }

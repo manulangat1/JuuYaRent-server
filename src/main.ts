@@ -14,11 +14,13 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { SWAGGER_DOCUMENTATION_URL } from './common/constants/general.constants';
 import { Environment } from './common/constants/types.enum';
 import { getLogLevels } from './common/utils';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const { port, environment, clientPortalUrl } = app.get(AppconfigService);
+  const { port, environment, clientPortalUrl, redisConfig } =
+    app.get(AppconfigService);
   const isProductionEnvironment = environment === Environment.production;
   app.useLogger(getLogLevels(isProductionEnvironment));
   app.use(helmet());
@@ -47,6 +49,21 @@ async function bootstrap() {
       }
     },
   });
+
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.REDIS,
+    options: {
+      // TODO: move all these to env variables.
+      username: redisConfig.redisUsername,
+      password: redisConfig.redisPassword,
+      socket: {
+        host: redisConfig.redisHost,
+        port: redisConfig.redisPort,
+      },
+    },
+  });
+
+  await app.startAllMicroservices();
 
   await app.listen(port);
 }

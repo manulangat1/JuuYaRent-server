@@ -14,10 +14,17 @@ export class AuthController {
     return this.authService.signAdminUp(dto);
   }
 
-  @Post('login')
+  @Post('admin/login')
   @Public()
   @HttpCode(HttpStatus.CREATED)
   async loginAdmin(@Body() dto: LoginDTO) {
     return this.authService.loginAdmin(dto);
+  }
+
+  @Post('agent/login')
+  @Public()
+  @HttpCode(HttpStatus.OK)
+  async loginAgent(@Body() dto: LoginDTO) {
+    return this.authService.loginAgent(dto);
   }
 }

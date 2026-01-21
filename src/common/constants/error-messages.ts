@@ -18,6 +18,17 @@ export const _401 = {
     code: 'ORIGIN_NOT_SUPPORTED',
     message: 'The origin is not allowed by cors',
   },
+  BAD_REQUEST: {
+    code: 'BAD REQUEST',
+    message: 'Either email or password is wrong!',
+  },
+};
+
+export const _403 = {
+  ACCESS_DENIED: {
+    code: 'ACCESS_DENIED',
+    message: 'You are not authorized to perform this action',
+  },
 };
 
 export const _404 = {

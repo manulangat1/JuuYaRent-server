@@ -14,9 +14,20 @@ import { PropertyModule } from './property/property.module';
 import { UserUnitModule } from './user-unit/user-unit.module';
 import { UserModule } from './user/user.module';
 import { EmailsModule } from './emails/emails.module';
+import { UserTypeGuard } from './common/guards/user-type.guard';
 
 @Module({
-  imports: [AppconfigModule, AuthModule, AdminModule, AgentModule, PortfolioModule, PropertyModule, UserUnitModule, UserModule, EmailsModule],
+  imports: [
+    AppconfigModule,
+    AuthModule,
+    AdminModule,
+    AgentModule,
+    PortfolioModule,
+    PropertyModule,
+    UserUnitModule,
+    UserModule,
+    EmailsModule,
+  ],
   controllers: [],
   providers: [
     {
@@ -26,6 +37,10 @@ import { EmailsModule } from './emails/emails.module';
     {
       provide: APP_GUARD,
       useClass: AuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: UserTypeGuard,
     },
   ],
 })

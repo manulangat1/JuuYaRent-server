@@ -14,6 +14,8 @@ import { CurrentUser } from '../common/decorators/current-user.decorator';
 import { Admin } from '../db/entities/Admin.entity';
 import { ApiSecurity } from '@nestjs/swagger';
 import { Portfolio } from '../db/entities/portfolio.entity';
+import { UserType } from '../common/decorators/user-type.decorator';
+import { Type } from '../common/constants/types.enum';
 
 @Controller('portfolios')
 @ApiSecurity('access-token')
@@ -21,17 +23,20 @@ export class PortfolioController {
   constructor(private readonly portfolioService: PortfolioService) {}
 
   @Post('create')
+  @UserType(Type.ADMIN)
   async create(@Body() dto: CreatePortfolioDTO, @CurrentUser() admin: Admin) {
     return this.portfolioService.create(dto, admin);
   }
 
   @Get('list')
   @HttpCode(HttpStatus.OK)
+  @UserType(Type.Agent)
   async getByAdmin(@CurrentUser() admin: Admin): Promise<Portfolio[]> {
     return this.portfolioService.getAllPortofolioForAdmin(admin);
   }
 
   @Get('/:id/agents')
+  @UserType(Type.ADMIN)
   async getAgentsInPortfolio(
     @CurrentUser() admin: Admin,
     @Param('id', new ParseIntPipe()) id: number,

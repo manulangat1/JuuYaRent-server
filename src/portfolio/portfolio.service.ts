@@ -65,7 +65,9 @@ export class PortfolioService {
   async getAllPortofolioForAdmin(admin: Admin): Promise<Portfolio[]> {
     const portfolios = await this.portfolioRepository.find({
       where: {
-        admin,
+        admin: {
+          id: admin.id,
+        },
       },
       order: { createdAt: 'ASC' },
     });

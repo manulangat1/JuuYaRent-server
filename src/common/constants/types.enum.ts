@@ -36,3 +36,9 @@ export enum Type {
 export enum AdminPermissions {
   VIEW_TENANTS = 'VIEW_TENANTS',
 }
+export enum AgentStatus {
+  'REGISTERED',
+  'EMAIL_VALIDATED',
+  'BLACK_LISTED',
+  'DELETED',
+}

@@ -1,13 +1,15 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Body, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Agent } from '../db/entities/agent.entity';
-import { DataSource, FindOneOptions, Repository } from 'typeorm';
+import { Admin, DataSource, FindOneOptions, Repository } from 'typeorm';
 import { CreateAgentDto } from './dto/create-agent.dto';
 import { dataResponse, DataResponseDTO } from '../common/dto/data-response.dto';
-import { _400 } from '../common/constants/error-messages';
+import { _400, _404 } from '../common/constants/error-messages';
 import { Portfolio } from '../db/entities/portfolio.entity';
 import { generateRandomText } from '../common/lib/auth';
 import { EmailsService } from '../emails/emails.service';
+import { CurrentUser } from '../common/decorators/current-user.decorator';
+import { UpdateAgentStatus } from './dto/update-agent-status.dto';
 
 @Injectable()
 export class AgentService {
@@ -81,5 +83,20 @@ export class AgentService {
       await this.agentRepository.save(agent);
     });
     return dataResponse(agent, 'Agent added to the portfolio successfully');
+  }
+
+  async updateAgentStatus(id: number, @Body() dto: UpdateAgentStatus) {
+    const agent = await this.agentRepository.findOne({
+      where: {
+        id,
+      },
+    });
+    if (!agent) throw new BadRequestException(_404.AGENT_NOT_FOUND);
+
+    agent.status = dto.status;
+    await this.agentRepository.save(agent);
+
+    //  TODO: come and add a new field. - updated by to track who has updated whatever agent.
+    return agent;
   }
 }

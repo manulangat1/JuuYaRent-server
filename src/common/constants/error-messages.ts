@@ -36,6 +36,10 @@ export const _404 = {
     code: 'FILE_NOT_FOUND',
     message: 'Requested file not found',
   },
+  AGENT_NOT_FOUND: {
+    code: 'AGENT_NOT_FOUND',
+    message: 'Requested AGENT not found',
+  },
   PORTFOLIO_NOT_FOUND: {
     code: 'PORTFOLIO_NOT_FOUND',
     message: `Portfolio not found`,

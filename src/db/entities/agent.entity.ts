@@ -10,6 +10,7 @@ import {
 import { genSalt } from 'bcrypt';
 import { hashPassword } from '../../common/lib/auth';
 import { Portfolio } from './portfolio.entity';
+import { AgentStatus } from '../../common/constants/types.enum';
 
 @Entity()
 @Index(['email'])
@@ -34,6 +35,9 @@ export class Agent {
 
   @ManyToOne(() => Portfolio, (portfolio) => portfolio.agent)
   portfolio: Portfolio;
+
+  @Column({ enum: AgentStatus, default: AgentStatus.REGISTERED })
+  status: AgentStatus;
 
   @BeforeInsert()
   @BeforeUpdate()

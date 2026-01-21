@@ -8,6 +8,7 @@ import { Admin } from '../db/entities/Admin.entity';
 import { JwtService } from '@nestjs/jwt';
 import { plainToInstance } from 'class-transformer';
 import { AdminLoginDTO } from '../admin/dto/admin-login-response.dto';
+import { EmailsService } from '../emails/emails.service';
 
 @Injectable()
 export class AuthService {
@@ -15,6 +16,7 @@ export class AuthService {
   constructor(
     private adminService: AdminService,
     private jwtService: JwtService,
+    private mailService: EmailsService,
   ) {}
 
   async signAdminUp(dto: CreateAdmin) {
@@ -45,6 +47,11 @@ export class AuthService {
     );
 
     this.logger.log(`Logging in susccess for user with email ${email}`);
+
+    // TEST email sending bit.
+    await this.mailService.sendWelcomeEmail({
+      recipient: email,
+    });
 
     return generateAccessToken;
   }

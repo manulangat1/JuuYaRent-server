@@ -9,3 +9,20 @@ export enum UnitStatus {
   OCCUPIED = 'OCCUPIED',
   BOOKED = 'BOOKED',
 }
+
+export enum OutBoxState {
+  REGISTERED = 'REGISTERED',
+  PROCESSED = 'PROCESSED',
+  FAILED = 'FAILED',
+}
+
+export enum OutBoxTopics {
+  EMAIL = 'EMAIL',
+  SMS = 'SMS',
+  PAYMENTS = 'PAYMENTS',
+}
+
+export enum AggregateType {
+  PAYMENTS = 'PAYMENTS',
+  COMMUNICATION = 'COMMUNICATION',
+}

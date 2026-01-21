@@ -20,4 +20,16 @@ export class EnvironmentDTO {
   @IsNotEmpty()
   @IsUrl()
   CLIENT_PORTAL_URL: string;
+
+  @IsNotEmpty()
+  @IsString()
+  MAIL_TRAP_TOKEN: string;
+
+  @IsNotEmpty()
+  @IsString()
+  MAIL_TRAP_SENDER_EMAIL: string;
+
+  @IsNotEmpty()
+  @IsString()
+  MAIL_TRAP_SENDER_NAME: string;
 }

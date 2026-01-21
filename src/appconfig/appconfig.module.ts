@@ -26,5 +26,6 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
     }),
   ],
   providers: [AppconfigService],
+  exports: [AppconfigService],
 })
 export class AppconfigModule {}

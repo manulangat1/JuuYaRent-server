@@ -3,6 +3,7 @@ import {
   BeforeUpdate,
   Column,
   Entity,
+  Index,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -11,6 +12,7 @@ import { hashPassword } from '../../common/lib/auth';
 import { Portfolio } from './portfolio.entity';
 
 @Entity()
+@Index(['email'])
 export class Agent {
   @PrimaryGeneratedColumn()
   id: number;

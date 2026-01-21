@@ -23,7 +23,7 @@ export class EmailsService {
     };
   }
 
-  async sendEmail(data) {
+  private async sendEmail(data) {
     await this.client.send({ ...data });
   }
   async sendWelcomeEmail(dto: WelcomeEmailDTO): Promise<void> {

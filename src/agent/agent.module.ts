@@ -9,5 +9,6 @@ import { Portfolio } from '../db/entities/portfolio.entity';
   imports: [TypeOrmModule.forFeature([Agent, Portfolio])],
   controllers: [AgentController],
   providers: [AgentService],
+  exports: [AgentService],
 })
 export class AgentModule {}

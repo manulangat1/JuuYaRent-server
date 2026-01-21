@@ -26,3 +26,13 @@ export enum AggregateType {
   PAYMENTS = 'PAYMENTS',
   COMMUNICATION = 'COMMUNICATION',
 }
+
+export enum Type {
+  Tenant = 'normal',
+  ADMIN = 'super',
+  Agent = 'agent',
+}
+
+export enum AdminPermissions {
+  VIEW_TENANTS = 'VIEW_TENANTS',
+}

@@ -1,6 +1,7 @@
 import { randomBytes } from 'crypto';
 import * as bcrypt from 'bcrypt';
 import { Admin } from '../../db/entities/Admin.entity';
+import { Agent } from '../../db/entities/agent.entity';
 
 export const hashPassword = async (
   password: string,
@@ -10,7 +11,7 @@ export const hashPassword = async (
 };
 
 export const comparePassword = async (
-  data: Admin,
+  data: Admin | Agent,
   password: string,
 ): Promise<boolean> => {
   return data.password === (await hashPassword(password, data.salt));

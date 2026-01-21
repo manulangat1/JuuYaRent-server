@@ -15,4 +15,18 @@ export class AppconfigService {
   get clientPortalUrl(): string {
     return this.configService.getOrThrow<string>('CLIENT_PORTAL_URL');
   }
+
+  get mailTrapToken(): string {
+    return this.configService.getOrThrow<string>('MAIL_TRAP_TOKEN');
+  }
+  get mailTrapSenderDetails() {
+    return {
+      senderName: this.configService.getOrThrow<string>(
+        'MAIL_TRAP_SENDER_NAME',
+      ),
+      senderEmail: this.configService.getOrThrow<string>(
+        'MAIL_TRAP_SENDER_EMAIL',
+      ),
+    };
+  }
 }

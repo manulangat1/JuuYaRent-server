@@ -13,9 +13,10 @@ import { PortfolioModule } from './portfolio/portfolio.module';
 import { PropertyModule } from './property/property.module';
 import { UserUnitModule } from './user-unit/user-unit.module';
 import { UserModule } from './user/user.module';
+import { EmailsModule } from './emails/emails.module';
 
 @Module({
-  imports: [AppconfigModule, AuthModule, AdminModule, AgentModule, PortfolioModule, PropertyModule, UserUnitModule, UserModule],
+  imports: [AppconfigModule, AuthModule, AdminModule, AgentModule, PortfolioModule, PropertyModule, UserUnitModule, UserModule, EmailsModule],
   controllers: [],
   providers: [
     {

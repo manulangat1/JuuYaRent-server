@@ -37,8 +37,8 @@ export enum AdminPermissions {
   VIEW_TENANTS = 'VIEW_TENANTS',
 }
 export enum AgentStatus {
-  'REGISTERED',
-  'EMAIL_VALIDATED',
-  'BLACK_LISTED',
-  'DELETED',
+  REGISTERED = 'REGISTERED',
+  EMAIL_VALIDATED = 'EMAIL_VALIDATED',
+  BLACK_LISTED = 'BLACK_LISTED',
+  DELETED = 'DELETED',
 }

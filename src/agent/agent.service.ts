@@ -10,10 +10,7 @@ import { generateRandomText } from '../common/lib/auth';
 import { EmailsService } from '../emails/emails.service';
 import { CurrentUser } from '../common/decorators/current-user.decorator';
 import { UpdateAgentStatus } from './dto/update-agent-status.dto';
-<<<<<<< HEAD
-=======
 import { AgentStatus } from '../common/constants/types.enum';
->>>>>>> 661d96c (feat-agent-status-update.)
 
 @Injectable()
 export class AgentService {
